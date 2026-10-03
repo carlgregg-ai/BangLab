@@ -1,0 +1,189 @@
+{
+  "receipt_kind": "E3_ONE_SHOT_LOCKED_TIMING",
+  "scope": "E3 only; not the future E8 model-run receipt.",
+  "timestamp_utc": "2026-10-03T23:08:04.598891+00:00",
+  "versions": {
+    "code": "9c98d3d9be0b2837652153fbc7cad650a5598dc0",
+    "spec": "v1.1",
+    "contract": "v0.1"
+  },
+  "environment": {
+    "python": "3.12.10",
+    "numpy": "2.3.5",
+    "scipy": "1.16.3"
+  },
+  "hashes": {
+    "dep_b1": "9ac268e4d96b145b3ef9f82fda71193c43339a103cec4632203f68e3c0ce1e79",
+    "dep_p82": "37de300cd68184cc2315b6fffaf4fa04dbe07127a30514e982b538238359dc09",
+    "dep_load": "7ddde731928ec2df4f8d4d256a75842181fc5ee54b885fb393b92f1a462c3b1b",
+    "config": "652c3e1307d246ed1583ea23f2c332ba86a3c4afb968b04c8a93e40628324781"
+  },
+  "model_source_sha256": {
+    "banglab/__init__.py": "504c91883917a63f347aed37d9edf1e230bba6ba5916b01ef4bcd01253f2e5e7",
+    "banglab/config.py": "9d52e3b542225b1ba596e397121e2e7333187441d08a6c2624c74bedfe63bef3",
+    "banglab/encounter/__init__.py": "2e47f9cbcc571177a118340e7a0b3d2920f18c5c8c8044f7f75607736e606826",
+    "banglab/encounter/longitudinal.py": "2325d0adaad69f38d5a8f2dd3349ccd7039eb5cbc1a27faafaab47763e2dfa2a",
+    "banglab/fixtures.py": "3ee4633edd310d6dee86eae0e5b597cbb79f77c96d29974d111388fbd0fd930b",
+    "banglab/units.py": "caeddd64cfcc2fd33fc2948de99ed7cc4b578ec79b77f0ba1e1cd032e6d66829"
+  },
+  "runner_sha256": "6ad62006da1aab68acb7ccf19a31398a336e437687a86a2d30dc55642322e437",
+  "config": {
+    "dev_m": [
+      20,
+      30,
+      40,
+      50
+    ],
+    "locked_m": [
+      25,
+      35,
+      45
+    ],
+    "method": "separate frozen E2 PCHIP objects; extrapolate=False",
+    "internal_unit": "s",
+    "comparison_unit": "ms",
+    "comparisons": [
+      "t2",
+      "t3",
+      "delta_t"
+    ],
+    "tolerance_ms": 1.0
+  },
+  "pre_open": {
+    "clean_working_tree_confirmed_before_E3_machinery": true,
+    "existing_E0_E1_E2_tests": "30 tests PASS",
+    "prior_E3_result_found": false,
+    "integrity_only_access": "E0/E1 source-integrity checks previously read fixture cells; no locked prediction evaluation."
+  },
+  "split": {
+    "dev_m": [
+      20,
+      30,
+      40,
+      50
+    ],
+    "locked_m": [
+      25,
+      35,
+      45
+    ],
+    "locked_read_before_E3": false
+  },
+  "prediction_method": "Construct LongitudinalModel(load_dev_longitudinal(...)) using the frozen DEV-only loader; evaluate its existing _lead and _trail PCHIP objects at 25/35/45 m through this E3-only capability. No alternative predictor, monkeypatch, refit, or E2 edit. Subtract in SI seconds, then multiply by 1000 for ms.",
+  "v7_ledger": {
+    "run_once": true,
+    "code_sha": "9c98d3d9be0b2837652153fbc7cad650a5598dc0",
+    "tolerance_ms": 1.0,
+    "status": "COMPLETE",
+    "verdict": "PASS",
+    "residuals_ms": {
+      "25": {
+        "t2": 0.027871212121212352,
+        "t3": 0.03446808510636856,
+        "delta_t": 0.006596872985163316
+      },
+      "35": {
+        "t2": -0.057857022234728106,
+        "t3": 0.0063359814370755885,
+        "delta_t": 0.06419300367179304
+      },
+      "45": {
+        "t2": -0.020014189886467193,
+        "t3": -0.003304066543478257,
+        "delta_t": 0.016710123342974725
+      }
+    },
+    "post_hoc_changes": [],
+    "predictions_ms": {
+      "25": {
+        "t2": 78.72787121212122,
+        "t3": 89.23446808510637,
+        "delta_t": 10.506596872985163
+      },
+      "35": {
+        "t2": 119.94214297776527,
+        "t3": 136.20633598143706,
+        "delta_t": 16.26419300367178
+      },
+      "45": {
+        "t2": 168.37998581011354,
+        "t3": 190.29669593345653,
+        "delta_t": 21.91671012334298
+      }
+    },
+    "predictions_sha256": "d611d8cf0667d7df32a90657bb552a94905d19e4dca1660c5280ce50a926037f",
+    "predictions_recorded_utc": "2026-10-03T23:08:04.602888+00:00",
+    "opened_utc": "2026-10-03T23:08:15.936914+00:00",
+    "observations_ms": {
+      "25": {
+        "t2": 78.7,
+        "t3": 89.2,
+        "delta_t": 10.5
+      },
+      "35": {
+        "t2": 120.0,
+        "t3": 136.2,
+        "delta_t": 16.19999999999999
+      },
+      "45": {
+        "t2": 168.4,
+        "t3": 190.3,
+        "delta_t": 21.900000000000006
+      }
+    },
+    "absolute_errors_ms": {
+      "25": {
+        "t2": 0.027871212121212352,
+        "t3": 0.03446808510636856,
+        "delta_t": 0.006596872985163316
+      },
+      "35": {
+        "t2": 0.057857022234728106,
+        "t3": 0.0063359814370755885,
+        "delta_t": 0.06419300367179304
+      },
+      "45": {
+        "t2": 0.020014189886467193,
+        "t3": 0.003304066543478257,
+        "delta_t": 0.016710123342974725
+      }
+    },
+    "decisions": {
+      "25": {
+        "t2": "PASS",
+        "t3": "PASS",
+        "delta_t": "PASS"
+      },
+      "35": {
+        "t2": "PASS",
+        "t3": "PASS",
+        "delta_t": "PASS"
+      },
+      "45": {
+        "t2": "PASS",
+        "t3": "PASS",
+        "delta_t": "PASS"
+      }
+    },
+    "completed_utc": "2026-10-03T23:08:15.949564+00:00",
+    "no_refitting_or_tuning": true,
+    "first_and_only_E3_evaluation": true
+  },
+  "outputs": [],
+  "gates": [
+    {
+      "id": "E3",
+      "verdict": "PASS"
+    }
+  ],
+  "claims_allowed": [
+    "Main-string timing matched the locked DEP rows within 1.0 ms."
+  ],
+  "applicability": {
+    "timing_ranges_m": [
+      20,
+      50
+    ],
+    "between_row_output_allowed": true
+  }
+}
