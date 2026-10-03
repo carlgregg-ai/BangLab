@@ -2,7 +2,7 @@
 
 | Stage | Status | Note |
 |---|---|---|
-| Contract audit | PASS | Claude v1.1/v0.1 contract reviewed |
+| Contract audit | PASS | Claude v1.1/v0.1 contract reviewed |\n| Full contract materialised in repo | **BLOCKED** | reviewed attachment pinned by SHA-256; full bytes not yet committed |
 | Repository pre-build skeleton | IN PROGRESS | no production model code |
 | DEP B1 fixture | PREPARED | source values available in contract |
 | DEP load fixture | PREPARED | source values available in contract |
