@@ -1,0 +1,34 @@
+{
+  "fixture":"DEP_P82",
+  "source":"DEP 99/953 Appendix B",
+  "locator":"printed p.82; PDF page 10/10",
+  "average_pellets_per_cartridge":192,
+  "epistemic_status":"MEASURED_PRIMARY",
+  "notes":["Counts transcribed directly from primary p.82 table.","Published standard deviations use population convention (ddof=0).","Percentage column is source-reported; raw counts are authoritative fixture observations."],
+  "rows":[
+    {"ref":1,"range_yd":30,"paper_5ft":184,"circle_30in":176,"source_percent":92},
+    {"ref":2,"range_yd":30,"paper_5ft":192,"circle_30in":184,"source_percent":96},
+    {"ref":3,"range_yd":30,"paper_5ft":192,"circle_30in":189,"source_percent":98},
+    {"ref":4,"range_yd":30,"paper_5ft":187,"circle_30in":181,"source_percent":94},
+    {"ref":5,"range_yd":30,"paper_5ft":190,"circle_30in":184,"source_percent":96},
+    {"ref":6,"range_yd":30,"paper_5ft":189,"circle_30in":181,"source_percent":94},
+    {"ref":7,"range_yd":30,"paper_5ft":192,"circle_30in":178,"source_percent":93},
+    {"ref":8,"range_yd":30,"paper_5ft":186,"circle_30in":178,"source_percent":93},
+    {"ref":9,"range_yd":30,"paper_5ft":185,"circle_30in":180,"source_percent":94},
+    {"ref":10,"range_yd":30,"paper_5ft":180,"circle_30in":174,"source_percent":91},
+    {"ref":11,"range_yd":40,"paper_5ft":195,"circle_30in":147,"source_percent":77},
+    {"ref":12,"range_yd":40,"paper_5ft":189,"circle_30in":149,"source_percent":78},
+    {"ref":13,"range_yd":40,"paper_5ft":197,"circle_30in":136,"source_percent":71},
+    {"ref":14,"range_yd":40,"paper_5ft":191,"circle_30in":160,"source_percent":83},
+    {"ref":15,"range_yd":40,"paper_5ft":196,"circle_30in":138,"source_percent":72},
+    {"ref":16,"range_yd":40,"paper_5ft":189,"circle_30in":153,"source_percent":80},
+    {"ref":17,"range_yd":40,"paper_5ft":194,"circle_30in":142,"source_percent":74},
+    {"ref":18,"range_yd":40,"paper_5ft":186,"circle_30in":134,"source_percent":70},
+    {"ref":19,"range_yd":40,"paper_5ft":192,"circle_30in":151,"source_percent":79},
+    {"ref":20,"range_yd":40,"paper_5ft":182,"circle_30in":143,"source_percent":74}
+  ],
+  "published_summary":{
+    "30yd":{"paper_mean":187.7,"paper_sd_population":3.8,"circle_mean":180.5,"circle_sd_population":4.2,"percent_mean":94,"percent_sd_population":2.2},
+    "40yd":{"paper_mean":191.1,"paper_sd_population":4.5,"circle_mean":145.3,"circle_sd_population":7.8,"percent_mean":76,"percent_sd_population":4.1}
+  }
+}
