@@ -1,0 +1,124 @@
+{
+  "receipt_kind": "E4_LATERAL_CALIBRATION",
+  "scope": "E4 only; not E8, physical validation, or a model-run output receipt.",
+  "timestamp_utc": "2026-10-03T23:25:08.278903+00:00",
+  "base_commit": "e4dfae0e67a470423453e9d921050bfd85239546",
+  "environment": {
+    "python": "3.12.10",
+    "numpy": "2.3.5",
+    "scipy": "1.16.3"
+  },
+  "hashes": {
+    "dep_b1": "9ac268e4d96b145b3ef9f82fda71193c43339a103cec4632203f68e3c0ce1e79",
+    "dep_p82": "37de300cd68184cc2315b6fffaf4fa04dbe07127a30514e982b538238359dc09",
+    "dep_load": "7ddde731928ec2df4f8d4d256a75842181fc5ee54b885fb393b92f1a462c3b1b"
+  },
+  "implementation_sha256": {
+    "banglab/encounter/lateral.py": "8dc85b23bba2f1a666d6250e64bdd161b9ad781d8fa3942181c58fb91e028a14",
+    "tests/test_lateral.py": "6482eba9039d52d4cb69e3fcf2192d1effcd27f0af0d528c81762f06b4e2f9d3"
+  },
+  "evidence": "DEP 99/953 App. B p.82 refs 1-20 circle counts; fixed 192 denominator; exact existing yd/in converters.",
+  "model": {
+    "density": "exp(-(x*x+y*y)/(2*sigma*sigma))/(2*pi*sigma*sigma)",
+    "density_unit": "m^-2",
+    "density_label": "MODEL_PREDICTION",
+    "pellet_density": "192*density",
+    "pellet_density_unit": "pellets/m^2",
+    "shape": "isotropic Gaussian",
+    "shape_label": "ASSUMED",
+    "circle_placement": "centred",
+    "circle_placement_label": "ASSUMED",
+    "baseline_sigma_law": "straight line through the two inferred sigmas",
+    "range_law_label": "ASSUMED",
+    "domain_m": [
+      20,
+      50
+    ],
+    "calibration_span_m": [
+      27.432,
+      36.576
+    ],
+    "outside_calibration_flag": "EXTRAPOLATED_LATERAL"
+  },
+  "radius": {
+    "value": 0.381,
+    "unit": "m",
+    "label": "SOURCE_DERIVED",
+    "locator": "DEP 99/953 App. B p.82; authoritative contract 8.2.3-4"
+  },
+  "calibration": [
+    {
+      "range_m": 27.432,
+      "mean_circle_count": 180.5,
+      "fraction": 0.9401041666666666,
+      "fraction_label": "SOURCE_DERIVED",
+      "sigma": {
+        "value": 0.16056812497757184,
+        "unit": "m",
+        "label": "INFERRED",
+        "locator": "DEP 99/953 App. B p.82; authoritative contract 8.2.3-4"
+      },
+      "reproduced_fraction": 0.9401041666666666,
+      "fraction_error": 0.0
+    },
+    {
+      "range_m": 36.576,
+      "mean_circle_count": 145.3,
+      "fraction": 0.7567708333333334,
+      "fraction_label": "SOURCE_DERIVED",
+      "sigma": {
+        "value": 0.22658099699356918,
+        "unit": "m",
+        "label": "INFERRED",
+        "locator": "DEP 99/953 App. B p.82; authoritative contract 8.2.3-4"
+      },
+      "reproduced_fraction": 0.7567708333333334,
+      "fraction_error": 0.0
+    }
+  ],
+  "inversion": "P=mean(circle_count)/192; P=1-exp(-rho^2/(2*sigma^2)); sigma=rho/sqrt(-2*ln(1-P)); rho=0.381 m.",
+  "proportional_variant": {
+    "law": "sigma=k*R",
+    "law_label": "PROPOSED",
+    "k": {
+      "value": 0.006113065973193573,
+      "unit": "1",
+      "label": "INFERRED",
+      "locator": "DEP 99/953 App. B p.82; authoritative contract 8.2.3-4"
+    },
+    "objective": "sum_i (1-exp(-rho^2/(2*(k*R_i)^2))-P_i)^2; unweighted fraction-space least squares",
+    "solver": "scipy.optimize.minimize_scalar bounded between the two sigma_i/R_i values; xatol=1e-14 is a numerical solver setting, not a scientific tolerance"
+  },
+  "gates": [
+    {
+      "id": "E4",
+      "verdict": "PASS",
+      "criteria": "fraction error <=1e-9; sigma 0.1606/0.2266 +/-1e-4 m; k 0.00611 +/-1e-5; positive sigma on 20-50 m; extrapolation flags"
+    }
+  ],
+  "tests": {
+    "E0": 8,
+    "E1": 9,
+    "E2": 13,
+    "E3_audit_guards_only": 5,
+    "E4": 13,
+    "total": 48,
+    "result": "OK; no failures or skips"
+  },
+  "preservation": {
+    "E2_unchanged": true,
+    "E3_historical_records_unchanged": true,
+    "E3_new_evaluation": false,
+    "canonical_fixtures_unchanged": true
+  },
+  "claims_allowed": [
+    "Lateral spread reproduces the DEP circle fractions at 30 and 40 yd (calibration)."
+  ],
+  "limitations": [
+    "Gaussian shape and centred circle placement are assumptions, not validated by two integrated fractions.",
+    "Local/clay-scale distribution, clumping, asymmetry and shot-to-shot spatial structure remain unresolved.",
+    "No physical validation, individual pellet positions, other loads, Carl cartridge, breakage, scoring, hit probability or DTL claim."
+  ],
+  "E5_started": false,
+  "outputs": []
+}
