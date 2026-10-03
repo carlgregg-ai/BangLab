@@ -6,10 +6,10 @@
 | Repository pre-build skeleton | IN PROGRESS | no production model code |
 | DEP B1 fixture | PREPARED | source values available in contract |
 | DEP load fixture | PREPARED | source values available in contract |
-| DEP p.82 fixture | **BLOCKED** | raw refs 1–20 absent from supplied contract/repo |
-| Fixture hashes verified | BLOCKED | waits for complete fixture set |
+| DEP p.82 fixture | PASS | refs 1–20 transcribed from primary printed p.82 |
+| Fixture hashes verified | READY FOR E1 | Git blob IDs recorded; SHA-256 to be frozen by first integrity test |
 | E0 | TODO | |
-| E1 | BLOCKED | waits for dep_p82 raw rows |
+| E1 | READY | primary fixture set complete; implementation test not yet run |
 | E2 | TODO | |
 | E3 locked validation | TODO | one-shot scientific gate |
 | E4–E8 | TODO | |
