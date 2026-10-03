@@ -2,6 +2,16 @@
   "fixture": "DEP_B1",
   "locator": "DEP 99/953 Appendix B, printed p.77, Figure B1",
   "notes": ["Main section of cloud only.", "t2/t3 MEASURED_PRIMARY; vL/vT/EL/ET/L SOURCE_DERIVED.", "Derived columns are consistency checks, never independent validation evidence."],
+  "column_labels": {
+    "range_m": "MEASURED_PRIMARY",
+    "t2_ms": "MEASURED_PRIMARY",
+    "t3_ms": "MEASURED_PRIMARY",
+    "vL_m_s": "SOURCE_DERIVED",
+    "vT_m_s": "SOURCE_DERIVED",
+    "EL_J": "SOURCE_DERIVED",
+    "ET_J": "SOURCE_DERIVED",
+    "L_m": "SOURCE_DERIVED"
+  },
   "rows": [
     {"range_m":20,"t2_ms":60.8,"t3_ms":68.4,"vL_m_s":293,"vT_m_s":250,"EL_J":8.0,"ET_J":5.9,"L_m":1.9,"split":"DEV"},
     {"range_m":25,"t2_ms":78.7,"t3_ms":89.2,"vL_m_s":265,"vT_m_s":230,"EL_J":6.6,"ET_J":4.9,"L_m":2.5,"split":"LOCKED"},

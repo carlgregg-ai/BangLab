@@ -7,7 +7,7 @@
   "notes":["Counts transcribed directly from primary p.82 table.","Published standard deviations use population convention (ddof=0).","Percentage column is source-reported; raw counts are authoritative fixture observations."],
   "rows":[
     {"ref":1,"range_yd":30,"paper_5ft":184,"circle_30in":176,"source_percent":92},
-    {"ref":2,"range_yd":30,"paper_5ft":192,"circle_30in":184,"source_percent":96},
+    {"ref":2,"range_yd":30,"paper_5ft":192,"circle_30in":184,"source_percent":96,"source_note":"overstrike, read 192, confirmed by mean"},
     {"ref":3,"range_yd":30,"paper_5ft":192,"circle_30in":189,"source_percent":98},
     {"ref":4,"range_yd":30,"paper_5ft":187,"circle_30in":181,"source_percent":94},
     {"ref":5,"range_yd":30,"paper_5ft":190,"circle_30in":184,"source_percent":96},
@@ -28,7 +28,7 @@
     {"ref":20,"range_yd":40,"paper_5ft":182,"circle_30in":143,"source_percent":74}
   ],
   "published_summary":{
-    "30yd":{"paper_mean":187.7,"paper_sd_population":3.8,"circle_mean":180.5,"circle_sd_population":4.2,"percent_mean":94,"percent_sd_population":2.2},
-    "40yd":{"paper_mean":191.1,"paper_sd_population":4.5,"circle_mean":145.3,"circle_sd_population":7.8,"percent_mean":76,"percent_sd_population":4.1}
+    "30yd":{"paper_mean":187.7,"paper_sd_population":3.8,"circle_mean":180.5,"circle_sd_population":4.2,"percent_mean":94,"percent_sd_population":2.2,"paper_sig_avg_percent":2.0,"circle_sig_avg_percent":2.3,"percent_sig_avg_percent":2.3},
+    "40yd":{"paper_mean":191.1,"paper_sd_population":4.5,"circle_mean":145.3,"circle_sd_population":7.8,"percent_mean":76,"percent_sd_population":4.1,"paper_sig_avg_percent":2.3,"circle_sig_avg_percent":5.4,"percent_sig_avg_percent":5.4}
   }
 }

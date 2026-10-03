@@ -1,0 +1,49 @@
+{
+  "receipt_kind": "E0_E1_FIXTURE_INTEGRITY",
+  "run_id": "293979b34af7485c80ac242460a89b66",
+  "timestamp_utc": "2026-10-03T18:44:12.836527+00:00",
+  "versions": {
+    "code_base": "774fb0c5184a4f0da43a75da193943b84f5aabb3",
+    "working_tree": "uncommitted E0/E1 review patch",
+    "spec": "v1.1",
+    "contract": "v0.1"
+  },
+  "hash_algorithm": "SHA-256 over exact file bytes (not Git blob SHA)",
+  "hashes": {
+    "dep_b1": "9ac268e4d96b145b3ef9f82fda71193c43339a103cec4632203f68e3c0ce1e79",
+    "dep_p82": "37de300cd68184cc2315b6fffaf4fa04dbe07127a30514e982b538238359dc09",
+    "dep_load": "7ddde731928ec2df4f8d4d256a75842181fc5ee54b885fb393b92f1a462c3b1b"
+  },
+  "source_hashes": {
+    "authoritative_contract": "9647717afa835afe1c5e79c86d1b01e93bb6c8804d8d8b2b81b5a00b4015085f",
+    "primary_pdf": "5ad891010f3e64cef4c319e003eb3a4595e32cc4e872f701a7cbddf82bdcb6f7"
+  },
+  "gates": [
+    {
+      "id": "E0",
+      "verdict": "PASS",
+      "detail": "8 schema/units tests"
+    },
+    {
+      "id": "E1",
+      "verdict": "PASS",
+      "detail": "8 source/fixture integrity tests plus hash-freeze receipt verification; LOCKED rows used only for source integrity, never calibration"
+    }
+  ],
+  "hash_freeze": "Accepted canonical fixture bytes after E1 PASS; carry these SHA-256 values into the release run receipt.",
+  "outputs": [],
+  "scope": "E0/E1 evidence integrity only; no model, E2, E3 evaluation, or release claim.",
+  "source_precision": {
+    "velocity_m_s": 1,
+    "energy_J": 0.1
+  },
+  "percentage_summary_convention": "% = count/192, population SD, and sig/avg = SD/mean are contract-defined (A15 and §8.7). Performing summary statistics on 100*circle_count/192 before rounding individual percentages is an implementation inference, not explicitly specified by the source or contract; this inference reproduces the published p.82 summary values.",
+  "claims_allowed": [
+    "Fixtures match the primary pages as transcribed; derived energy columns are internally consistent at source print precision."
+  ],
+  "warnings": [
+    "Implementation correctness is not physical validation.",
+    "Full model-run receipt schema (Â§8.8/E8) has not been implemented or validated."
+  ],
+  "energy_consistency_convention": "The 186.5–187.5 mg mass interval is contract-defined (§8.7). Source velocities are printed to 1 m/s and energies to 0.1 J. Treating those displayed values as nearest-rounded intervals (±0.5 m/s and ±0.05 J) is an implementation assumption, not explicitly specified by the source or contract. The assumption is used only for source-consistency checking; it is not a fitted physical parameter or a model tolerance."
+}
