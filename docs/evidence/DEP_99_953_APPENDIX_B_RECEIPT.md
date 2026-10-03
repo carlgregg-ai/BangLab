@@ -21,5 +21,12 @@ Using population SD (ddof=0), raw rows reproduce displayed SDs:
 
 The source-reported percentage column is retained separately. Raw count observations are not reconstructed from aggregates.
 
-## Binary-storage note
-The primary PDF is the evidence authority. The connected GitHub contents writer available in this session accepts UTF-8 text only, so it cannot commit PDF bytes directly. The artifact hash above pins the exact reviewed binary. The PDF must be added to `docs/evidence/` by a binary-capable Git client/Codex before release; its SHA-256 must match exactly.
+## Independent committed-binary verification
+
+PASS — independently verified by Codex on 2026-10-03 in `C:\Users\carlg\Documents\BangLab` on branch `main`, with a clean working tree before these housekeeping updates.
+
+The primary PDF is committed at `docs/evidence/03_DEP_99_953_Appendix_B_PRIMARY_UNALTERED.pdf`. SHA-256 was calculated independently for both the working-tree file and the binary bytes read directly from `HEAD`; both match the expected digest exactly:
+
+`5ad891010f3e64cef4c319e003eb3a4595e32cc4e872f701a7cbddf82bdcb6f7`
+
+The committed primary PDF is the evidence authority. This check verifies binary identity only; it does not run scientific gates or authorize model implementation.

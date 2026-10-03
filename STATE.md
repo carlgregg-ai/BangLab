@@ -3,6 +3,7 @@
 | Stage | Status | Note |
 |---|---|---|
 | Contract audit | PASS | Claude v1.1/v0.1 contract reviewed |\n| Full contract materialised in repo | **BLOCKED** | reviewed attachment pinned by SHA-256; full bytes not yet committed |
+| Committed primary evidence binary | PASS | Independently verified by Codex on 2026-10-03: working-tree and HEAD PDF SHA-256 both match `5ad891010f3e64cef4c319e003eb3a4595e32cc4e872f701a7cbddf82bdcb6f7`; main and clean working tree confirmed before housekeeping updates; see DEP Appendix B evidence receipt |
 | Repository pre-build skeleton | IN PROGRESS | no production model code |
 | DEP B1 fixture | PREPARED | source values available in contract |
 | DEP load fixture | PREPARED | source values available in contract |
