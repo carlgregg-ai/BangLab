@@ -1,8 +1,10 @@
 # CODEX IMPLEMENTATION PROMPT — BANGLAB v0.1
 
-**Do not begin production implementation while STATE.md contains a BLOCKED fixture/E1 status.**
+**Do not begin production implementation until the verified full authoritative contract artifact is committed, or while STATE.md contains a BLOCKED fixture/E1 status.**
 
-When the blocker is cleared:
+Contract materialisation and primary PDF verification have passed; the p.82 primary rows are committed. The contract artifact commit is pending, and E0/E1 have not been run. This housekeeping update does not authorize implementation.
+
+After these prerequisites are satisfied and implementation is authorized:
 
 1. Read AGENTS.md, the authoritative build contract, STATE.md, CLAIMS.md, DECISIONS.md and docs/GATES.md.
 2. Run pre-build/fixture verification first. If it fails, stop and report the exact failure.

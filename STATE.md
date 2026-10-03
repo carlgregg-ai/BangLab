@@ -2,7 +2,8 @@
 
 | Stage | Status | Note |
 |---|---|---|
-| Contract audit | PASS | Claude v1.1/v0.1 contract reviewed |\n| Full contract materialised in repo | **BLOCKED** | reviewed attachment pinned by SHA-256; full bytes not yet committed |
+| Contract audit | PASS | Claude v1.1/v0.1 contract reviewed |
+| Full contract materialised in repo | PASS | Full artifact physically present under docs/evidence; independently verified on 2026-10-03 against pinned SHA-256 `9647717afa835afe1c5e79c86d1b01e93bb6c8804d8d8b2b81b5a00b4015085f`; artifact commit pending |
 | Committed primary evidence binary | PASS | Independently verified by Codex on 2026-10-03: working-tree and HEAD PDF SHA-256 both match `5ad891010f3e64cef4c319e003eb3a4595e32cc4e872f701a7cbddf82bdcb6f7`; main and clean working tree confirmed before housekeeping updates; see DEP Appendix B evidence receipt |
 | Repository pre-build skeleton | IN PROGRESS | no production model code |
 | DEP B1 fixture | PREPARED | source values available in contract |
@@ -16,4 +17,4 @@
 | E4–E8 | TODO | |
 | v0.1 | NOT RELEASED | |
 
-**Codex implementation must not start until the p.82 fixture blocker is cleared and pre-build verification passes.**
+**The p.82 source-data and primary PDF storage blockers are cleared. The verified full contract artifact must be committed before implementation; pre-build/fixture verification remains required as the first implementation step. E0/E1 have not been run.**

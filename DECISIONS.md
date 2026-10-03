@@ -16,4 +16,4 @@ Deng supports plausibility of an evolving 3-D pellet swarm and radial-dispersion
 25/35/45 m may not be exposed to calibration/interpolation construction before E3. Access must be mediated by a one-shot gate capability; ordinary model code sees DEV rows only. E3 failure is a scientific result, not a coding defect.
 
 ## D-006 — missing p.82 raw rows
-The supplied contract specifies 20 per-round p.82 observations but does not reproduce those observations. Do not reconstruct them from aggregates. `dep_p82.json` remains BLOCKED until primary rows are supplied/recovered.
+The supplied contract specifies 20 per-round p.82 observations but does not reproduce those observations. Do not reconstruct them from aggregates. Resolved: primary refs 1–20 are supplied in committed `data/fixtures/dep_p82.json`; the DEP Appendix B receipt records independent reproduction of published summaries. The source-data blocker is cleared. The prohibition on reconstructing observations from aggregates remains in force; E1 fixture integrity verification is still required.

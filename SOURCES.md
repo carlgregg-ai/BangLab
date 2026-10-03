@@ -10,5 +10,5 @@
 | Gaussian lateral form | Compton as incorporated by contract | SOURCE_DERIVED form | lateral baseline |
 | Deng exterior DEM | contextual evidence only | SUPPORTING/FUTURE | docs only |
 
-## Critical missing source payload
-The supplied build contract does not contain the 20 per-round p.82 paper/circle count rows required by fixture F2. Primary values must be recovered before E1 can be implemented honestly.
+## Recovered primary source payload
+The supplied build contract does not contain the 20 per-round p.82 paper/circle count rows required by fixture F2. Those primary rows have now been recovered and committed in `data/fixtures/dep_p82.json`; the DEP Appendix B receipt records their transcription and independent summary checks. The source-data blocker is cleared; E1 fixture integrity verification remains unrun.

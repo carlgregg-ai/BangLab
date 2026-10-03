@@ -15,5 +15,5 @@
 13. If a scientific ambiguity is found, STOP and report it. Do not invent a solution.
 14. Keep patches small and coherent; focused tests first, full suite at milestones.
 15. Fixtures are evidence. Never change fixture values merely to satisfy tests.
-16. `dep_p82.json` must not be fabricated from aggregate statistics. Implementation is blocked until its primary per-round rows are supplied.
+16. `dep_p82.json` must not be fabricated from aggregate statistics. The primary per-round rows are now supplied in the committed fixture; the source-data blocker is cleared (see the DEP Appendix B receipt). Fixture integrity verification remains required before proceeding to model slices.
 17. Package namespace is `banglab`; this naming decision does not alter the contract science.
