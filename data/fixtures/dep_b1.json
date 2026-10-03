@@ -1,0 +1,14 @@
+{
+  "fixture": "DEP_B1",
+  "locator": "DEP 99/953 Appendix B, printed p.77, Figure B1",
+  "notes": ["Main section of cloud only.", "t2/t3 MEASURED_PRIMARY; vL/vT/EL/ET/L SOURCE_DERIVED.", "Derived columns are consistency checks, never independent validation evidence."],
+  "rows": [
+    {"range_m":20,"t2_ms":60.8,"t3_ms":68.4,"vL_m_s":293,"vT_m_s":250,"EL_J":8.0,"ET_J":5.9,"L_m":1.9,"split":"DEV"},
+    {"range_m":25,"t2_ms":78.7,"t3_ms":89.2,"vL_m_s":265,"vT_m_s":230,"EL_J":6.6,"ET_J":4.9,"L_m":2.5,"split":"LOCKED"},
+    {"range_m":30,"t2_ms":98.4,"t3_ms":111.8,"vL_m_s":242,"vT_m_s":213,"EL_J":5.5,"ET_J":4.2,"L_m":2.9,"split":"DEV"},
+    {"range_m":35,"t2_ms":120.0,"t3_ms":136.2,"vL_m_s":223,"vT_m_s":198,"EL_J":4.6,"ET_J":3.7,"L_m":3.3,"split":"LOCKED"},
+    {"range_m":40,"t2_ms":143.3,"t3_ms":162.4,"vL_m_s":206,"vT_m_s":185,"EL_J":4.0,"ET_J":3.2,"L_m":3.6,"split":"DEV"},
+    {"range_m":45,"t2_ms":168.4,"t3_ms":190.3,"vL_m_s":192,"vT_m_s":173,"EL_J":3.4,"ET_J":2.8,"L_m":3.9,"split":"LOCKED"},
+    {"range_m":50,"t2_ms":195.3,"t3_ms":220.0,"vL_m_s":180,"vT_m_s":163,"EL_J":3.0,"ET_J":2.5,"L_m":4.1,"split":"DEV"}
+  ]
+}
