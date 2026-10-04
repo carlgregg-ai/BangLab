@@ -1,0 +1,179 @@
+{
+  "receipt_kind": "E6_F4_DISPERSION_FIRST_EVALUATION",
+  "timestamp_utc": "2026-10-04T00:22:49.627001+00:00",
+  "starting_commit": "29d0d234eb126f5f280fc06c99fc07009d4bba88",
+  "plan_sha256": "6075532277a5155fcec5483b73e94ee9997a833d70295fdee9a77acadcca43cf",
+  "plan": {
+    "record_kind": "E6_PREDECLARATION",
+    "timestamp_utc": "2026-10-04T00:20:58.189557+00:00",
+    "starting_commit": "29d0d234eb126f5f280fc06c99fc07009d4bba88",
+    "evaluation_order": "F4 dispersion first; if either target is excluded, record E6 FAIL/STOP and do not continue the remaining oracle comparisons.",
+    "authority": [
+      "DECISIONS.md D-008",
+      "DECISIONS.md D-009",
+      "DECISIONS.md D-010",
+      "contract 8.6/8.7"
+    ],
+    "F4_dispersion": {
+      "variable": "raw p.82 circle_30in count per physical shot",
+      "groups": [
+        {
+          "range_yd": 30,
+          "refs": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "seed": 30030,
+          "target": 1.77
+        },
+        {
+          "range_yd": 40,
+          "refs": [
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20
+          ],
+          "seed": 40040,
+          "target": 1.91
+        }
+      ],
+      "n": 10,
+      "variance_ddof": 1,
+      "statistic": "sample variance / arithmetic mean",
+      "B": 100000,
+      "resampling": "ordinary nonparametric bootstrap of whole shots, with replacement, ten observations per replicate",
+      "rng": "numpy.random.Generator(numpy.random.PCG64(seed))",
+      "draw_layout": "rng.integers(0,10,size=(100000,10)); rows are bootstrap replicates",
+      "interval": "percentile",
+      "confidence_level": 0.95,
+      "quantiles": [
+        0.025,
+        0.975
+      ],
+      "quantile_method": "numpy.quantile(method=\"linear\"): index (B-1)*p, linear interpolation between adjacent sorted values; fixed before calculation",
+      "decision": "lower <= target <= upper, full precision, both ranges required"
+    },
+    "oracle_comparisons": "Not executed before F4 prerequisite; no E6 baseline or case-6 Monte Carlo result exists.",
+    "fixture_sha256": {
+      "dep_b1": "9ac268e4d96b145b3ef9f82fda71193c43339a103cec4632203f68e3c0ce1e79",
+      "dep_p82": "37de300cd68184cc2315b6fffaf4fa04dbe07127a30514e982b538238359dc09",
+      "dep_load": "7ddde731928ec2df4f8d4d256a75842181fc5ee54b885fb393b92f1a462c3b1b"
+    }
+  },
+  "environment": {
+    "python": "3.12.10",
+    "numpy": "2.3.5",
+    "rng": "Generator(PCG64(seed))"
+  },
+  "implementation_sha256": {
+    "banglab/encounter/oracle.py": "719174117d436c6836925b0d981f1946573eeda1a69a0503ac69f30a38c293a5",
+    "tests/test_oracle.py": "33fb02df39f0d8e8b4fbdb5592fdcec29f7b893f90975a14a089542a77cdb171"
+  },
+  "status": "COMPLETE",
+  "results": [
+    {
+      "mean": 180.5,
+      "sample_variance": 19.166666666666668,
+      "D": 0.10618651892890121,
+      "ci_95": [
+        0.02833706189410887,
+        0.1825746451297112
+      ],
+      "range_yd": 30,
+      "refs": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "raw_counts": [
+        176,
+        184,
+        189,
+        181,
+        184,
+        181,
+        178,
+        178,
+        180,
+        174
+      ],
+      "seed": 30030,
+      "B": 100000,
+      "target": 1.77,
+      "decision": "FAIL"
+    },
+    {
+      "mean": 145.3,
+      "sample_variance": 67.56666666666666,
+      "D": 0.46501491167699005,
+      "ci_95": [
+        0.16097558689670166,
+        0.7374435316686775
+      ],
+      "range_yd": 40,
+      "refs": [
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      "raw_counts": [
+        147,
+        149,
+        136,
+        160,
+        138,
+        153,
+        142,
+        134,
+        151,
+        143
+      ],
+      "seed": 40040,
+      "B": 100000,
+      "target": 1.91,
+      "decision": "FAIL"
+    }
+  ],
+  "E6_verdict": "FAIL",
+  "scope": "F4 physical-count dispersion bootstrap only; contact-oracle comparisons and isolated case-6 reference not implemented or executed.",
+  "historical_implementations_and_receipts_modified": false,
+  "E3_new_evaluation": false,
+  "E7_started": false,
+  "E8_started": false,
+  "limitations": "Finite-observation bootstrap uncertainty of ten physical shots per range. Not oracle sampling error, measurement-error uncertainty, denominator uncertainty, Gaussian uncertainty, other-load uncertainty or physical validation.",
+  "outputs": [],
+  "F4_D_verdict": "FAIL",
+  "gate_action": "STOP",
+  "completed_utc": "2026-10-04T00:22:49.702958+00:00",
+  "first_evaluation_preserved": true,
+  "seed_or_sample_changes": false
+}

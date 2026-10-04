@@ -24,3 +24,30 @@ Human-authorised clarification before E5 implementation/results, against checkpo
 This clarifies the verification invariant in contract section 8.7; it does not change the physical/model specification in section 8.2.6. Under the isotropic baseline field and uniform arrival, arbitrary ellipse orientations require joint inversion: pi(e_a,e_c,psi) = pi(-e_a,-e_c,psi). Separate e_a and e_c reflections are required only when the target has those symmetries relative to the travel axes (principal axes aligned, including relative psi=0 or pi/2 modulo pi). Circular geometry is orientation-independent; rotational comparisons rotate the travel direction and offsets together for a moving target. General rotated non-circular ellipses must not be forced to satisfy separate reflections, nor may geometry/orientation be changed to satisfy a test. Use the existing numerical tolerances; no scientific tolerance changes.
 
 Historical E0-E4 receipts remain unchanged. E6, E7 and E8 are not authorised by this clarification.
+
+## D-008 — isolated E6 case-6 verification variant (2026-10-04)
+Human-authorised clarification at `29d0d234eb126f5f280fc06c99fc07009d4bba88`. The original E6 STOP was legitimate and occurred before E6 implementation/results. No Monte Carlo comparison had been run; no numerical result motivated this clarification.
+
+Contract section 8.7 case 6 is retained, not deleted or substituted. It is an isolated CONTRACT-SPECIFIED VERIFICATION VARIANT (kappa=0.4 and 10% tail both PROPOSED), not part of the frozen E5 baseline. Cases 1-5 compare an independent oracle against frozen E5; case 6 compares a separate deterministic variant reference against an independent variant oracle. E5 and historical E0-E5 receipts remain frozen and unchanged. The variant must not become the baseline; this is not commencement of general E7 sensitivity analysis.
+
+For case 6 only, authorisation covers the minimum separate reference and oracle for the exact contract definitions (8.2.2 and 8.2.5): h(q)=0.9 on [0,1] plus 0.1 on [1,2]; sigma(q,R)=sigma_bar(R)*(1+0.4*(q-1/2)); sigma_bar calibration preserves each p.82 marginal circle fraction under that h. These are model/stress definitions, not measurements. A material missing definition requires another STOP. No seed, sample count, tolerance, parameter, case or failed first result may be changed to obtain a pass. E7/E8 remain unauthorised.
+
+## D-009 — F4 dispersion statistic and prospective uncertainty rule (2026-10-04)
+Human-authorised clarification at `29d0d234eb126f5f280fc06c99fc07009d4bba88`. The preceding F4/E6 STOP was legitimate and occurred before F4/E6 numerical evaluation. No estimator was tested against the targets before selection; no Monte Carlo comparison or E6 scientific PASS/FAIL result had occurred. No numerical result motivated this clarification.
+
+For the replicate count variable N, define mean(N)=sum(N_i)/n and s_N^2=sum((N_i-mean(N))^2)/(n-1). F4 D=s_N^2/mean(N), using SAMPLE variance, ddof=1; do not substitute population variance. The contract targets remain 1.77 (30 yd) and 1.91 (40 yd), unchanged. Do not replace this variance-to-mean definition with binomial-normalised dispersion.
+
+Acceptance at each range requires its target to lie within a prospectively defined 95% uncertainty interval for the Monte Carlo estimate of D. The exact interval method, replicate/sample structure, fixed parameters and any RNG/seeds must be fixed before evaluation. No fixed tolerance was reverse-engineered from the targets. If the existing design does not unambiguously determine that interval, STOP before calculating D and obtain the missing prospective decision; never select a method after seeing which interval contains a target.
+
+D is a contract verification statistic, not a directly measured physical shotgun parameter or evidence establishing clumping, independence or physical validity. Historical E0-E5 receipts remain unchanged. D-008 and other E6 controls remain in force. E7/E8 are not started or authorised.
+
+Pending design clarification: the existing E6 contact-count simulations do not specify an F4 Monte Carlo replicate experiment at 30/40 yd, its sampling/resampling law or its 95% interval construction. D-009 fixes the estimator and target-in-interval rule, but does not supply those remaining definitions. No D calculation or E6 comparison has been performed.
+
+## D-010 — F4 physical replicates and bootstrap design (2026-10-04)
+Human-authorised clarification before F4 D calculation, bootstrap, target comparison or E6 scientific result. The preceding STOP was legitimate and occurred before D was calculated; no target comparison had occurred. No design, estimator or uncertainty method was selected after inspecting D or target inclusion.
+
+N is the canonical raw DEP p.82 30-inch-circle pellet count per physical shot, not paper counts, rounded percentages, E5 expectations or E6 simulated contacts. Use refs 1-10 at 30 yd and refs 11-20 at 40 yd: n=10 independently observed patterns per range. Calculate arithmetic mean, sample variance (n-1, ddof=1), and D=sample variance/mean directly from these observations, separately by range. D-009 targets remain 1.77 and 1.91.
+
+Use the ordinary nonparametric shot-level bootstrap: sample ten complete count observations with replacement per replicate; B=100000; D*=sample variance(ddof=1)/mean. Use the percentile 95% interval (empirical 2.5th and 97.5th percentiles). RNG is numpy.random.Generator(numpy.random.PCG64(seed)), independently seeded 30030 at 30 yd and 40040 at 40 yd. Both inclusive target-in-interval checks must pass, at full precision. No seed, B, ddof, method, confidence level, target or tolerance changes after results.
+
+This interval addresses finite-observation uncertainty under resampling these ten physical shot counts. It does not quantify measurement error, denominator uncertainty, Gaussian-model uncertainty, other-load uncertainty, E6 oracle Monte Carlo error or physical validation. E6's separate 20000-round contact comparison remains distinct. Historical E0-E5 receipts and frozen E5 remain unchanged. D-008 and D-009 remain binding. E7/E8 remain unstarted.
