@@ -1,0 +1,24 @@
+{
+  "record_kind": "JONES_REFERENCE_MODEL_SENSITIVITY_RECEIPT",
+  "repository": "carlgregg-ai/BangLab",
+  "branch": "jones-reference-models",
+  "base_commit": "0993cbd72d65d26218a230b5e974d89d8365fbb8",
+  "e6_frozen_commit": "9480c66752f554a1f85a72be5343d87e4e2ab868",
+  "e6_modified": false,
+  "scope": "Jones compatibility and controlled implementation corrections only; no E7 adoption.",
+  "source_basis": "Bangleian research/jones_2005/JONES_RECOVERED_MODEL_SPEC.md and recovered Java validation anchors.",
+  "tests": {
+    "command": "PYTHONPATH=. pytest -q tests/test_jones_reference.py",
+    "result": "5 passed"
+  },
+  "sensitivity": {
+    "case_count": 324,
+    "summary": {
+      "skill_only": {"mean_abs_delta_pp": 7.647316452949768, "max_abs_delta_pp": 25.46991338157173},
+      "poisson_only": {"mean_abs_delta_pp": 0.00008439133320951675, "max_abs_delta_pp": 0.00023446492653533824},
+      "angles_only": {"mean_abs_delta_pp": 0.0004309836853283085, "max_abs_delta_pp": 0.00997714691234819},
+      "corrected_all": {"mean_abs_delta_pp": 7.647562374773702, "max_abs_delta_pp": 25.46993261235312}
+    }
+  },
+  "claim_ceiling": "Implementation sensitivity only. Agreement/disagreement is not physical validation."
+}
