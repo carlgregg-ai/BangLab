@@ -1,0 +1,118 @@
+{
+  "record_kind": "D-011_F4-v2_FIRST_NULL_TEST_NOT_E8",
+  "status": "COMPLETE",
+  "started_utc": "2026-10-04T00:58:15.895227+00:00",
+  "results": [
+    {
+      "mean": 180.5,
+      "p_hat": 0.9401041666666666,
+      "sample_variance": 19.166666666666668,
+      "binomial_variance": 10.811197916666673,
+      "D": 1.772853185595567,
+      "B": 1000000,
+      "upper_tail_count": 67350,
+      "p_MC": 0.06735093264906736,
+      "alpha": 0.05,
+      "evidence_of_overdispersion": false,
+      "null_reference_interval_95": [
+        0.3043992838779307,
+        2.1098901098901086
+      ],
+      "percentile_method": "linear",
+      "seed": 30192,
+      "range_yd": 30,
+      "refs": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "raw_counts": [
+        176,
+        184,
+        189,
+        181,
+        184,
+        181,
+        178,
+        178,
+        180,
+        174
+      ],
+      "saved_utc": "2026-10-04T00:58:16.522993+00:00"
+    },
+    {
+      "mean": 145.3,
+      "p_hat": 0.7567708333333334,
+      "sample_variance": 67.56666666666666,
+      "binomial_variance": 35.34119791666666,
+      "D": 1.9118386090360198,
+      "B": 1000000,
+      "upper_tail_count": 45098,
+      "p_MC": 0.045098954901045096,
+      "alpha": 0.05,
+      "evidence_of_overdispersion": true,
+      "null_reference_interval_95": [
+        0.3004694835680751,
+        2.1091919793527887
+      ],
+      "percentile_method": "linear",
+      "seed": 40192,
+      "range_yd": 40,
+      "refs": [
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      "raw_counts": [
+        147,
+        149,
+        136,
+        160,
+        138,
+        153,
+        142,
+        134,
+        151,
+        143
+      ],
+      "saved_utc": "2026-10-04T00:58:17.008331+00:00"
+    }
+  ],
+  "historical_E6_verdict": "FAIL_UNCHANGED",
+  "method_status": "NEW_PROSPECTIVE_NOT_RECOVERED_HISTORICAL",
+  "remaining_E6_contact_oracle_run": false,
+  "E7_started": false,
+  "E8_started": false,
+  "historical_CI_acceptance": false,
+  "plan_sha256": "aed798aa3c9690658cc452babcaf3547db91128a2f64b66b3deef651bfc7ef9a",
+  "preflight_sha256": "7314dee15316d005a45ac20798876d5c97134e030b6dab5e69afa358c1dd6ffd",
+  "starting_commit": "ea4d32e9f9eb559e8f855e8141043aae86a3b32c",
+  "environment": {
+    "python": "3.12.14",
+    "numpy": "2.3.5"
+  },
+  "implementation_sha256": {
+    "banglab/encounter/oracle_f4_v2.py": "9a04270619bf6e0da6172898322aa522c456a4590afc2598bd3d2f13374ffeaa",
+    "banglab/f4_v2_gate.py": "cba3ea95263c3e018a1727018625656322df2070ec260841d3c2db5fa07bc99e",
+    "tests/test_f4_v2.py": "21b5f0f55b5a1cfb0c9fa40a73693171e654060f6876e42abeae2ed0773c5e2a",
+    "DECISIONS.md": "75efc13cf138915a6d94c4a74f8145548c5eb27e445a1052f43798ce93712551"
+  },
+  "input_fixture_sha256": "37de300cd68184cc2315b6fffaf4fa04dbe07127a30514e982b538238359dc09",
+  "interval_label": "NULL REFERENCE INTERVAL; not a CI for physical D",
+  "completed_utc": "2026-10-04T00:58:17.010682+00:00",
+  "first_result_preserved": true
+}

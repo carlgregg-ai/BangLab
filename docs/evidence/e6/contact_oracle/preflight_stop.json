@@ -1,0 +1,59 @@
+{
+  "record_kind": "E6_CONTACT_ORACLE_SOFTWARE_PREFLIGHT_STOP_NOT_SCIENTIFIC_EVALUATION",
+  "timestamp_utc": "2026-10-04T01:39:20.061854+00:00",
+  "status": "STOP",
+  "reason": "Two filesystem PermissionError errors in newly added runner fault-injection tests; no repair or retry after expanded suite failure.",
+  "plan_sha256": "b9481db993c05f68ce9dd156f0129e45ae2166727d435d6bb7d22afdc84b2b38",
+  "focused_tests": {
+    "run": 11,
+    "passed": 11,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0
+  },
+  "complete_suite": {
+    "command": "python -B -X utf8 -m unittest discover -s tests -v",
+    "run": 96,
+    "passed": 94,
+    "errors": 2,
+    "failures": 0,
+    "skipped": 0
+  },
+  "errors": [
+    {
+      "test": "GateSoftwareTests.test_injected_failed_comparison_stops_before_next_case",
+      "exception": "PermissionError [Errno 13] writing preflight.json; cleanup also PermissionError [WinError 5]",
+      "directory": "docs/evidence/e6/contact_oracle/tmp5bl9llwb"
+    },
+    {
+      "test": "GateSoftwareTests.test_injected_implementation_failure_persisted_and_retry_refused",
+      "exception": "PermissionError [Errno 13] exclusive-open receipt.json; cleanup also PermissionError [WinError 5]",
+      "directory": "docs/evidence/e6/contact_oracle/tmpl3l8qd1o"
+    }
+  ],
+  "E6_scientific_evaluation_started": false,
+  "authoritative_run_receipt_exists": false,
+  "scientific_results": [],
+  "E5_unchanged": true,
+  "E3_audit_only": true,
+  "F4_v1_v2_scientific_rerun": false,
+  "F4_v1_historical_decisions": [
+    "FAIL",
+    "FAIL"
+  ],
+  "E7_started": false,
+  "E8_started": false,
+  "preserved_file_count": 67,
+  "preserved_files_all_match": true,
+  "geometry_sha256": "6c31367e8c1503ba3969c262418372ccbdc147a84addbdb1d9cb6525b3017d22",
+  "output_sha256": {
+    "banglab/encounter/oracle_contact.py": "a91c9671cbf71a8dc427bf0e34cdf01290724b456c08bec18af8dd7b96deed9e",
+    "banglab/encounter/reference_case6.py": "b8ac6dfe1f34ff251b2d031d236ab80489808296a1042a0542c5bfcb7e3ff8b5",
+    "banglab/e6_contact_gate.py": "057a50d03d2917f1e9f2f83429942e8bb7089f4bcf4cecbf7e2505b7b6113e91",
+    "tests/test_contact_oracle.py": "5316018cd71b289d84d47281bf44586e8441edf1cf85f279f0f0ddc3d79b40a2",
+    "docs/evidence/e6/contact_oracle/plan.json": "b9481db993c05f68ce9dd156f0129e45ae2166727d435d6bb7d22afdc84b2b38",
+    "STATE.md": "65754976c74b3d9d8f650b78bec31c48ebf550a55ca6979a339ae9e7bb79b356"
+  },
+  "git_diff_check": "PASS before this record and STATE append; final check reported separately",
+  "no_stage_commit_push": true
+}

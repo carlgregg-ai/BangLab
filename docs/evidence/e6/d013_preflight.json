@@ -1,0 +1,51 @@
+{
+  "record_kind": "D013_PRE_E6_GEOMETRY_AND_AUDIT_PREFLIGHT",
+  "timestamp_utc": "2026-10-04T01:25:40.711117+00:00",
+  "head": "ea4d32e9f9eb559e8f855e8141043aae86a3b32c",
+  "geometry_complete": true,
+  "audit_repair_applied": true,
+  "scientific_execution_ready": false,
+  "remaining_prerequisites": [
+    "contact-oracle per-case/per-stream seed and draw plan not predeclared",
+    "independent baseline MC route not implemented",
+    "isolated case-6 deterministic reference and MC route not implemented",
+    "contact-oracle software verification not implemented"
+  ],
+  "contact_oracle_seed_status": "NOT_PREDECLARED",
+  "sample_counts": {
+    "single_pellets_per_case": 1000000,
+    "rounds_per_case": 20000,
+    "pellets_per_round": 192
+  },
+  "focused_tests": {
+    "run": 13,
+    "passed": 13,
+    "skipped": 0
+  },
+  "full_tests": {
+    "run": 82,
+    "passed": 82,
+    "skipped": 0
+  },
+  "git_diff_check": "PASS",
+  "E0_E5_unchanged": true,
+  "E3_audit_only": true,
+  "F4_v1_v2_scientific_rerun": false,
+  "E6_scientific_evaluation": false,
+  "E7_E8_started": false,
+  "hashes": {
+    "DECISIONS.md": "81cbdcd91a0c239c12c3366629cc6560ab4b682ca2b0d918768e10bbca5b6ff3",
+    "tests/test_f4_v2.py": "a98e9cc784e569af2a16ebd093142d6cd0676da730ec326aee217a5570ed13c4",
+    "docs/evidence/f4_v2/audit_snapshots/DECISIONS-through-D011.md": "75efc13cf138915a6d94c4a74f8145548c5eb27e445a1052f43798ce93712551",
+    "docs/evidence/f4_v2/audit_snapshots/test_f4_v2.original.py.txt": "21b5f0f55b5a1cfb0c9fa40a73693171e654060f6876e42abeae2ed0773c5e2a",
+    "docs/evidence/f4_v2/audit_revision.json": "74cf685aad5f31c328b742915114b22ab690fe291feffd719d30ba05997985f2",
+    "docs/evidence/e6/geometry_table.json": "6c31367e8c1503ba3969c262418372ccbdc147a84addbdb1d9cb6525b3017d22"
+  },
+  "preserved_scientific_receipts": {
+    "docs/evidence/e6/receipt.json": "04b4f1273b20867acc4cc009f422f560226be1341f96ac3d7bab9c98ed600ef8",
+    "docs/evidence/f4_v2/receipt.json": "3e8ce0c788efd80e996b0250824e3420b3f5967af233e6bc8c7f44bf0110be07",
+    "docs/evidence/f4_v2/preflight.json": "7314dee15316d005a45ac20798876d5c97134e030b6dab5e69afa358c1dd6ffd"
+  },
+  "review_report_sha256": "569d8eb2dc4f3522edac33a64884408b25b2077407e7b3617dbd5f34c4cb915a",
+  "no_stage_commit_push": true
+}

@@ -1,0 +1,33 @@
+{
+  "record_kind": "D012_E6_PRE_EVALUATION_STOP",
+  "timestamp_utc": "2026-10-04T01:13:36.730495+00:00",
+  "status": "STOP",
+  "reason": "Missing case-2 e_c, case-3 e_a, case-5 e_c; no explicit zero-default rule recovered. D-012 requires STOP rather than inventing inputs.",
+  "head": "ea4d32e9f9eb559e8f855e8141043aae86a3b32c",
+  "before_append_tests": {
+    "run": 77,
+    "passed": 77,
+    "skipped": 0
+  },
+  "after_append_tests": {
+    "run": 77,
+    "passed": 76,
+    "failed": 1,
+    "skipped": 0,
+    "failure": "F4-v2 saved audit pins whole DECISIONS.md; authorised D-012 append changes current hash. Frozen historical file remains a byte-identical prefix."
+  },
+  "prior_decisions_sha256": "75efc13cf138915a6d94c4a74f8145548c5eb27e445a1052f43798ce93712551",
+  "current_decisions_sha256": "6b236ccca0885cfc53f909a55045b0482d24156ad874484f7851dabe146b532a",
+  "geometry_table_sha256": "cb589fa9b25b54f768b6162a3ff0d2bb76ae59ed221797bc19649b180f510e48",
+  "F4_v1_receipt_sha256": "04b4f1273b20867acc4cc009f422f560226be1341f96ac3d7bab9c98ed600ef8",
+  "F4_v2_receipt_sha256": "3e8ce0c788efd80e996b0250824e3420b3f5967af233e6bc8c7f44bf0110be07",
+  "git_diff_check": "PASS",
+  "other_preexisting_files_unchanged": true,
+  "implementation_started": false,
+  "baseline_results": [],
+  "case6_results": [],
+  "E3_F4_rerun": false,
+  "E7_E8_started": false,
+  "report_sha256": "3f815e96bae53e43af46ad78d6e3a33eac5dda7f9009071e57580fe609f3e607",
+  "no_stage_commit_push": true
+}

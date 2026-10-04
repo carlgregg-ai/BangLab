@@ -1,0 +1,28 @@
+{
+  "record_kind": "F4-v2_PRE_EVALUATION_IMPLEMENTATION_FREEZE",
+  "timestamp_utc": "2026-10-04T00:58:15.760273+00:00",
+  "plan_sha256": "aed798aa3c9690658cc452babcaf3547db91128a2f64b66b3deef651bfc7ef9a",
+  "implementation_sha256": {
+    "banglab/encounter/oracle_f4_v2.py": "9a04270619bf6e0da6172898322aa522c456a4590afc2598bd3d2f13374ffeaa",
+    "banglab/f4_v2_gate.py": "cba3ea95263c3e018a1727018625656322df2070ec260841d3c2db5fa07bc99e",
+    "tests/test_f4_v2.py": "21b5f0f55b5a1cfb0c9fa40a73693171e654060f6876e42abeae2ed0773c5e2a",
+    "DECISIONS.md": "75efc13cf138915a6d94c4a74f8145548c5eb27e445a1052f43798ce93712551"
+  },
+  "environment": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "scipy": "1.16.3"
+  },
+  "pre_evaluation_suite": {
+    "tests_run": 77,
+    "passed": 76,
+    "skipped": 1,
+    "reason_for_skip": "first-result receipt not yet created; saved audit only"
+  },
+  "earlier_development_checks": [
+    "test-first missing-module import failure before implementation",
+    "temporary-directory permission error in guard test; replaced with exclusive-open refusal against existing immutable receipt",
+    "default bundled runtime lacked SciPy; complete suite passed using existing e2-wheel-runtime packages"
+  ],
+  "git_diff_check": "PASS before evaluation"
+}

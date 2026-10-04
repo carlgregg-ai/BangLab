@@ -1,0 +1,45 @@
+{
+  "record_kind": "E6_CONTROLLED_RESUMPTION_PRE_EVALUATION_STOP",
+  "timestamp_utc": "2026-10-04T01:08:40.591639+00:00",
+  "head": "ea4d32e9f9eb559e8f855e8141043aae86a3b32c",
+  "origin_main": "ea4d32e9f9eb559e8f855e8141043aae86a3b32c",
+  "historical_E5_baseline": "29d0d234eb126f5f280fc06c99fc07009d4bba88",
+  "status": "STOP",
+  "reason": "Case 3 non-circular target relative orientation unspecified; case 5 psi frame/travel direction not fixed. Contract 8.2.6, 8.3, 8.7; frozen E5 requires explicit angles. No geometry defaults invented.",
+  "required_decision": "Prospectively fix the case-3 ellipse orientation relative to travel and the case-5 travel/frame convention; provide explicit complete case geometry.",
+  "existing_suite": {
+    "command": "python -B -X utf8 -m unittest discover -s tests -v",
+    "tests": 77,
+    "passed": 77,
+    "skipped": 0,
+    "errors": 0,
+    "failures": 0
+  },
+  "git_diff_check": "PASS",
+  "F4_v2_manifest_verified": true,
+  "E0_E5_unchanged": true,
+  "E3_audit_only": true,
+  "F4_v1_rerun": false,
+  "F4_v2_rerun": false,
+  "contact_oracle_implemented": false,
+  "baseline_results": [],
+  "isolated_case6_results": [],
+  "E7_started": false,
+  "E8_started": false,
+  "inputs_sha256": {
+    "DECISIONS.md": "75efc13cf138915a6d94c4a74f8145548c5eb27e445a1052f43798ce93712551",
+    "STATE.md": "54c9018075c6283766e3ef68c824236910d0d0b30f1a7ca9fba34f98d04794a9",
+    "docs/evidence/e6/plan.json": "6075532277a5155fcec5483b73e94ee9997a833d70295fdee9a77acadcca43cf",
+    "docs/evidence/e6/receipt.json": "04b4f1273b20867acc4cc009f422f560226be1341f96ac3d7bab9c98ed600ef8",
+    "docs/evidence/f4_v2/receipt.json": "3e8ce0c788efd80e996b0250824e3420b3f5967af233e6bc8c7f44bf0110be07",
+    "docs/evidence/f4_v2/verification.json": "5dcb59b33a6c8e30d84f19eaca6fcc982d0873758c6623310e112c9b3249b754",
+    "data/fixtures/dep_b1.json": "9ac268e4d96b145b3ef9f82fda71193c43339a103cec4632203f68e3c0ce1e79",
+    "data/fixtures/dep_load.json": "7ddde731928ec2df4f8d4d256a75842181fc5ee54b885fb393b92f1a462c3b1b",
+    "data/fixtures/dep_p82.json": "37de300cd68184cc2315b6fffaf4fa04dbe07127a30514e982b538238359dc09"
+  },
+  "report": {
+    "path": "C:\\Users\\carlg\\Documents\\Codex\\2026-10-03\\yaml-c-users-carlg-documents-banglab\\outputs\\E6-resumption-stop.md",
+    "sha256": "8bc1effa8c3db701498547379f3af6a4b94dbd9d21e12228ab866b8b6691d96d"
+  },
+  "no_commit_or_push": true
+}

@@ -1,0 +1,73 @@
+{
+  "record_kind": "E6_SOFTWARE_PREFLIGHT_INFRASTRUCTURE_RECOVERY_NOT_EXECUTION_AUTHORISATION",
+  "timestamp_utc": "2026-10-04T01:44:40.010188+00:00",
+  "status": "SOFTWARE_PREFLIGHT_PASS_STOP_FOR_HUMAN_REVIEW",
+  "diagnosis": {
+    "runtime": "CPython 3.12.14 Windows restricted sandbox",
+    "cause": "TemporaryDirectory -> mkdtemp -> os.mkdir(path,0o700). Windows CPython creates a protected DACL granting SYSTEM, Administrators and owner; parent sandbox access grants are not inherited. Child file creation, directory traversal and cleanup fail under the restricted token.",
+    "classification": "Test temporary-directory handling / Windows sandbox ACL interaction; not production scientific implementation.",
+    "evidence": "Installed tempfile.mkdtemp source calls mkdir 0700; parent ACL contains inherited sandbox grants; reading child ACLs is itself denied. CPython v3.12.14 posixmodule.c lines 5024-5040 establishes the protected ACL mechanism. Replacement inherited-ACL directories successfully support writes, exclusive-open and cleanup in both test runs.",
+    "source": "https://raw.githubusercontent.com/python/cpython/v3.12.14/Modules/posixmodule.c",
+    "failures": [
+      {
+        "test": "GateSoftwareTests.test_injected_failed_comparison_stops_before_next_case",
+        "operation": "PermissionError [Errno 13] writing preflight.json; cleanup also PermissionError [WinError 5]",
+        "path": "C:\\Users\\carlg\\Documents\\BangLab\\docs\\evidence\\e6\\contact_oracle\\tmp5bl9llwb\\preflight.json"
+      },
+      {
+        "test": "GateSoftwareTests.test_injected_implementation_failure_persisted_and_retry_refused",
+        "operation": "PermissionError [Errno 13] exclusive-open receipt.json; cleanup also PermissionError [WinError 5]",
+        "path": "C:\\Users\\carlg\\Documents\\BangLab\\docs\\evidence\\e6\\contact_oracle\\tmpl3l8qd1o\\receipt.json"
+      }
+    ]
+  },
+  "repair": "Test-local scratch_directory context manager: UUID child, mkdir 0777 on Windows to inherit parent ACL (0700 elsewhere); containment check before cleanup. Two call sites replaced. No mocks, assertions or production calculations changed.",
+  "changed_existing_files": [
+    "tests/test_contact_oracle.py"
+  ],
+  "focused_tests": {
+    "run": 14,
+    "passed": 14,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "complete_suite": {
+    "run": 96,
+    "passed": 96,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "git_diff_check": "PASS",
+  "plan_sha256": "b9481db993c05f68ce9dd156f0129e45ae2166727d435d6bb7d22afdc84b2b38",
+  "geometry_sha256": "6c31367e8c1503ba3969c262418372ccbdc147a84addbdb1d9cb6525b3017d22",
+  "preserved_manifest_files_verified": 67,
+  "production_files_unchanged": {
+    "banglab/encounter/oracle_contact.py": "a91c9671cbf71a8dc427bf0e34cdf01290724b456c08bec18af8dd7b96deed9e",
+    "banglab/encounter/reference_case6.py": "b8ac6dfe1f34ff251b2d031d236ab80489808296a1042a0542c5bfcb7e3ff8b5",
+    "banglab/e6_contact_gate.py": "057a50d03d2917f1e9f2f83429942e8bb7089f4bcf4cecbf7e2505b7b6113e91"
+  },
+  "seeds": {
+    "1": 60001,
+    "2": 60002,
+    "3": 60003,
+    "4": 60004,
+    "5": 60005,
+    "6": 60006
+  },
+  "single_pellets_per_case": 1000000,
+  "rounds_per_case": 20000,
+  "frozen_plan_inputs_and_acceptance_unchanged": true,
+  "original_stop_sha256": "22168ff172b800549c075b5d373c516dfac2506957e1bbc2e2022d5522f61917",
+  "repaired_test_sha256": "38624e05c43449fe396f18abe6975b71ea671f913e6c7ee7a3747bf862fd6335",
+  "E6_scientific_evaluation": false,
+  "authoritative_receipt_exists": false,
+  "E3_audit_only": true,
+  "F4_v1_v2_scientific_rerun": false,
+  "E7_started": false,
+  "E8_started": false,
+  "no_stage_commit_push": true,
+  "remaining_environment_artifacts": "The two original inaccessible tmp directories remain untouched; git status still warns about their permissions. No new test directory remains.",
+  "patch": "--- before/tests/test_contact_oracle.py\n+++ after/tests/test_contact_oracle.py\n@@ -1,13 +1,16 @@\n \"\"\"Synthetic software checks only; never execute the six-case E6 experiment.\"\"\"\n import ast\n+from contextlib import contextmanager\n from dataclasses import replace\n import hashlib\n import json\n import math\n+import os\n from pathlib import Path\n-import tempfile\n+import shutil\n import unittest\n from unittest.mock import patch\n+from uuid import uuid4\n \n import numpy as np\n from scipy.integrate import quad\n@@ -18,6 +21,25 @@\n from banglab import e6_contact_gate as gate\n \n ROOT = Path(__file__).resolve().parents[1]\n+\n+\n+@contextmanager\n+def scratch_directory():\n+    \"\"\"Real test files, with inherited sandbox ACLs on Windows.\n+\n+    Python's TemporaryDirectory uses mkdir(0700), which installs a protected\n+    Windows ACL excluding the parent's sandbox grants. Do not alter global\n+    tempfile behaviour or weaken permissions on existing evidence directories.\n+    \"\"\"\n+    parent=gate.EVIDENCE.resolve()\n+    directory=parent/('test-'+uuid4().hex)\n+    directory.mkdir(mode=0o777 if os.name=='nt' else 0o700)\n+    try:\n+        yield directory\n+    finally:\n+        if directory.resolve().parent!=parent:\n+            raise RuntimeError('Test cleanup escaped its declared parent.')\n+        shutil.rmtree(directory)\n \n \n def toy():\n@@ -157,7 +179,7 @@\n \n     def test_injected_implementation_failure_persisted_and_retry_refused(self):\n         # Fault injection in a disposable directory, not an E6 evaluation.\n-        with tempfile.TemporaryDirectory(dir=gate.EVIDENCE) as tmp:\n+        with scratch_directory() as tmp:\n             directory=Path(tmp)\n             with patch.object(gate,'verify_preflight',side_effect=ValueError('synthetic fault')):\n                 result=gate.run_once(directory)\n@@ -171,7 +193,7 @@\n         plan=gate.read_json(gate.EVIDENCE/'plan.json')\n         fake={'single_pellets':100,'single_contacts':0,'rounds':100,\n               'round_count_histogram':[100]+[0]*192}\n-        with tempfile.TemporaryDirectory(dir=gate.EVIDENCE) as tmp:\n+        with scratch_directory() as tmp:\n             directory=Path(tmp)\n             (directory/'preflight.json').write_text('{}')\n             with patch.object(gate,'verify_preflight',return_value=(plan,{})), \\\n"
+}

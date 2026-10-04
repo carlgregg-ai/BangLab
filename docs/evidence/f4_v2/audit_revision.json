@@ -1,0 +1,10 @@
+{
+  "status": "APPLIED_HUMAN_AUTHORISED_D013",
+  "historical_test_sha256": "21b5f0f55b5a1cfb0c9fa40a73693171e654060f6876e42abeae2ed0773c5e2a",
+  "revised_test_sha256": "a98e9cc784e569af2a16ebd093142d6cd0676da730ec326aee217a5570ed13c4",
+  "historical_decisions_sha256": "75efc13cf138915a6d94c4a74f8145548c5eb27e445a1052f43798ce93712551",
+  "original_preflight_unchanged": true,
+  "scientific_code_unchanged": true,
+  "timestamp_utc": "2026-10-04T01:22:59.026846+00:00",
+  "authority": "D-013; audit only; no scientific rerun"
+}

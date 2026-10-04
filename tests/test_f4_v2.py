@@ -1,0 +1,183 @@
+"""D-011 software checks; synthetic simulations only, never rerun the gate."""
+from fractions import Fraction
+import hashlib
+import json
+from pathlib import Path
+import unittest
+from unittest.mock import patch
+
+import numpy as np
+from banglab.encounter import oracle_f4_v2 as oracle
+from banglab import f4_v2_gate as gate
+
+ROOT = Path(__file__).resolve().parents[1]
+EVIDENCE = ROOT / 'docs/evidence/f4_v2'
+
+
+
+def verify_decision_history(current, historical, expected_sha256):
+    """Authenticate the original bytes, then require an exact immutable prefix."""
+    if hashlib.sha256(historical).hexdigest() != expected_sha256:
+        raise AssertionError('Historical decision snapshot hash mismatch')
+    if not current.startswith(historical):
+        raise AssertionError('Historical decision bytes changed or truncated')
+
+
+class DecisionHistoryAuditTests(unittest.TestCase):
+    def setUp(self):
+        self.frozen = (EVIDENCE/'audit_snapshots/DECISIONS-through-D011.md').read_bytes()
+        self.digest = json.loads((EVIDENCE/'preflight.json').read_text())['implementation_sha256']['DECISIONS.md']
+
+    def test_original_and_later_appends_are_accepted(self):
+        verify_decision_history(self.frozen, self.frozen, self.digest)
+        current = (ROOT/'DECISIONS.md').read_bytes()
+        verify_decision_history(current, self.frozen, self.digest)
+        verify_decision_history(current+b'\n## D-013 - synthetic later decision\n', self.frozen, self.digest)
+
+    def test_change_to_d011_estimator_rejected(self):
+        start = self.frozen.index(b'## D-011')
+        position = self.frozen.index(b'ddof=1', start)
+        changed = self.frozen[:position]+b'ddof=0'+self.frozen[position+6:]
+        with self.assertRaisesRegex(AssertionError, 'changed'):
+            verify_decision_history(changed, self.frozen, self.digest)
+
+    def test_insertion_deletion_and_line_ending_changes_rejected(self):
+        start = self.frozen.index(b'## D-011')
+        for changed in (self.frozen[:start]+b'X'+self.frozen[start:],
+                        self.frozen[:-1],self.frozen.replace(b'\r\n',b'\n')):
+            with self.subTest():
+                with self.assertRaises(AssertionError):
+                    verify_decision_history(changed,self.frozen,self.digest)
+
+    def test_snapshot_tampering_cannot_bless_modified_history(self):
+        changed = self.frozen+b'X'
+        with self.assertRaisesRegex(AssertionError, 'snapshot hash'):
+            verify_decision_history(changed,changed,self.digest)
+
+    def test_old_history_reordering_is_rejected(self):
+        start = self.frozen.index(b'## D-011')
+        changed = self.frozen[start:]+self.frozen[:start]
+        with self.assertRaises(AssertionError):
+            verify_decision_history(changed,self.frozen,self.digest)
+
+
+def exact_statistic(counts):
+    mean = Fraction(sum(counts), 10)
+    variance = sum((Fraction(x)-mean)**2 for x in counts) / 9
+    denominator = mean * (1-mean/192)
+    return mean, variance, denominator, variance/denominator
+
+
+class F4V2Tests(unittest.TestCase):
+    def test_statistic_ddof_and_denominator_against_rational_arithmetic(self):
+        counts = list(range(90, 100))
+        mean, variance, denominator, expected = exact_statistic(counts)
+        actual = oracle.observed_statistic(counts)
+        for key, value in [('mean',mean), ('sample_variance',variance),
+                           ('binomial_variance',denominator), ('D',expected)]:
+            self.assertAlmostEqual(actual[key], float(value), places=14)
+        self.assertEqual(actual['p_hat'], float(mean/192))
+
+    def test_seeded_simulation_uses_each_experiment_mean(self):
+        counts = list(range(90, 100))
+        a = oracle.null_test(counts, seed=123, experiments=101)
+        self.assertEqual(a, oracle.null_test(counts, seed=123, experiments=101))
+        rng = np.random.Generator(np.random.PCG64(123))
+        rows = rng.binomial(192, sum(counts)/1920, size=(101, 10))
+        values = [float(exact_statistic([int(x) for x in row])[3]) for row in rows]
+        observed = float(exact_statistic(counts)[3])
+        tail = sum(value >= observed for value in values)
+        self.assertEqual(a['upper_tail_count'], tail)
+        self.assertEqual(a['p_MC'], (1+tail)/102)
+        values.sort()
+        # Linear percentiles of 101 values lie halfway across indices 2/3, 97/98.
+        np.testing.assert_allclose(a['null_reference_interval_95'],
+                                   [(values[2]+values[3])/2, (values[97]+values[98])/2],
+                                   rtol=0, atol=1e-14)
+
+    def test_upper_tail_includes_ties_and_plus_one(self):
+        a = oracle.summarize_null(2., np.array([1.,2.,3.,4.]))
+        self.assertEqual(a['upper_tail_count'], 3)
+        self.assertEqual(a['p_MC'], 4/5)
+        self.assertEqual(oracle.summarize_null(9., np.array([1.,2.]))['p_MC'], 1/3)
+
+    def test_significance_strict_boundary_and_no_historical_inputs(self):
+        self.assertFalse(oracle.summarize_null(2., np.ones(19))['evidence_of_overdispersion'])
+        self.assertTrue(oracle.summarize_null(2., np.ones(20))['evidence_of_overdispersion'])
+        # With all ties, upper-tail p=1 even for a large absolute observed value.
+        self.assertFalse(oracle.summarize_null(100., np.full(20,100.))['evidence_of_overdispersion'])
+        # No historical central values or CI arguments are accepted by the decision API.
+        with self.assertRaises(TypeError):
+            oracle.summarize_null(2., np.ones(20), historical_ci=[0,100])
+
+    def test_invalid_observations_and_undefined_denominator_stop(self):
+        for counts in ([1]*9, [1.5]*10, [True]*10, [-1]*10, [193]*10, [0]*10, [192]*10):
+            with self.assertRaises(ValueError):
+                oracle.observed_statistic(counts)
+        with self.assertRaises(ValueError):
+            oracle.dispersion_rows(np.array([[1]*10, [192]*10]))
+        for seed,b in ((True,10),(-1,10),(1,1),(1,True)):
+            with self.assertRaises(ValueError):
+                oracle.null_test([96]*10, seed=seed, experiments=b)
+
+    def test_existing_run_reservation_prevents_source_read_or_simulation(self):
+        # Exercise actual exclusive-open refusal against an existing immutable receipt.
+        directory = ROOT/'docs/evidence/e6'
+        self.assertTrue((directory/'receipt.json').exists())
+        with patch.object(gate, 'verify_preflight', side_effect=AssertionError('no reads')):
+            with patch.object(oracle, 'null_test', side_effect=AssertionError('no simulation')):
+                with self.assertRaises(FileExistsError):
+                    gate.run_once(directory)
+
+    def test_historical_files_and_failure_preserved(self):
+        plan = json.loads((EVIDENCE/'plan.json').read_text())
+        for path, expected in plan['preserved_file_sha256'].items():
+            if path in plan['allowed_existing_file_changes']:
+                continue
+            self.assertEqual(hashlib.sha256((ROOT/path).read_bytes()).hexdigest(), expected, path)
+        historical = json.loads((ROOT/'docs/evidence/e6/receipt.json').read_text())
+        self.assertEqual(historical['E6_verdict'], 'FAIL')
+        self.assertEqual([r['decision'] for r in historical['results']], ['FAIL','FAIL'])
+        self.assertEqual([r['D'] for r in historical['results']],
+                         [0.10618651892890121,0.46501491167699005])
+
+
+@unittest.skipUnless((EVIDENCE/'receipt.json').exists(), 'First F4-v2 not yet executed')
+class SavedF4V2Tests(unittest.TestCase):
+    def test_observed_calculation_exact_and_saved_decision_audit_only(self):
+        receipt = json.loads((EVIDENCE/'receipt.json').read_text())
+        self.assertEqual(receipt['status'], 'COMPLETE')
+        fixture = json.loads((ROOT/'data/fixtures/dep_p82.json').read_text())
+        self.assertEqual(len(receipt['results']), 2)
+        for result in receipt['results']:
+            counts = [r['circle_30in'] for r in fixture['rows'] if r['range_yd']==result['range_yd']]
+            expected = exact_statistic(counts)
+            self.assertEqual(result['raw_counts'], counts)
+            for key,value in zip(('mean','sample_variance','binomial_variance','D'), expected):
+                self.assertAlmostEqual(result[key],float(value),places=13)
+            self.assertEqual(result['B'],1000000)
+            self.assertEqual(result['p_MC'],(1+result['upper_tail_count'])/1000001)
+            self.assertEqual(result['evidence_of_overdispersion'],result['p_MC']<0.05)
+            self.assertEqual(result['seed'], {30:30192,40:40192}[result['range_yd']])
+        self.assertEqual(receipt['plan_sha256'],hashlib.sha256((EVIDENCE/'plan.json').read_bytes()).hexdigest())
+        freeze = json.loads((EVIDENCE/'preflight.json').read_text())
+        for name,digest in freeze['implementation_sha256'].items():
+            if name == 'DECISIONS.md':
+                historical = (EVIDENCE/'audit_snapshots/DECISIONS-through-D011.md').read_bytes()
+                verify_decision_history((ROOT/name).read_bytes(), historical, digest)
+            elif name == 'tests/test_f4_v2.py':
+                # Preserve the original test artifact and pin this authorised revised audit separately.
+                historical = (EVIDENCE/'audit_snapshots/test_f4_v2.original.py.txt').read_bytes()
+                self.assertEqual(hashlib.sha256(historical).hexdigest(), digest)
+                revision = json.loads((EVIDENCE/'audit_revision.json').read_text())
+                self.assertEqual(revision['historical_test_sha256'], digest)
+                self.assertEqual(hashlib.sha256((ROOT/name).read_bytes()).hexdigest(),
+                                 revision['revised_test_sha256'])
+            else:
+                self.assertEqual(hashlib.sha256((ROOT/name).read_bytes()).hexdigest(),digest)
+        self.assertLess(freeze['timestamp_utc'], receipt['started_utc'])
+        self.assertLess(receipt['started_utc'], receipt['completed_utc'])
+
+
+if __name__ == '__main__':
+    unittest.main()
