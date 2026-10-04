@@ -1,0 +1,22 @@
+{
+  "record_kind": "E7_JF_01_LOWRY_SOURCE_REGRESSION",
+  "status": "PASS_STOP_FOR_REVIEW",
+  "scope": "Recovered Lowry 1979 worked-example regression only",
+  "e6_modified": false,
+  "banglab_longitudinal_outputs_evaluated": false,
+  "model_adopted": false,
+  "source_anchor": {
+    "range_yd": 40.0,
+    "l80_in": 80.0,
+    "stationary_pattern_pct": 75.0,
+    "pellet_velocity_ft_s": 700.0,
+    "target_velocity_ft_s": 70.0,
+    "crossing_angle_deg": 90.0,
+    "expected_factor": 8.0,
+    "expected_loss_pp": 4.8,
+    "expected_moving_pattern_pct": 70.2
+  },
+  "source_convention_note": "Compatibility reproduces published arithmetic 80*70/700=8 verbatim; no silent inch-to-foot conversion is applied.",
+  "guardrail": "Only the explicitly recovered factor-8 / 75%-pattern Table-B anchor is encoded. No interpolation.",
+  "claim_ceiling": "Source-calculation compatibility only; no physical validation, modern-load generalisation, breakage claim, or E6 strengthening."
+}
